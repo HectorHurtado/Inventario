@@ -38,8 +38,8 @@ pipeline {
 				gitTool: 'Default', 
 				submoduleCfg: [], 
 				userRemoteConfigs: [[
-					credentialsId: 'GitHub_mb3rn4l', 
-					url:'https://github.com/mb3rn4l/reserva-canchas-hexagonal'
+					credentialsId: 'GitHub_HectorHurtado', 
+					url:'https://github.com/HectorHurtado/Inventario'
 				]]
 			])
 		}
