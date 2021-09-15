@@ -36,4 +36,11 @@ public interface RepositorioProduct {
      */
     boolean existeExcluyendoId(Long id,String name);
 
+    /**
+     * Retorna un producto por su id
+     * @param id
+     * @return producto
+     */
+     Product findById(Long id);
+
 }

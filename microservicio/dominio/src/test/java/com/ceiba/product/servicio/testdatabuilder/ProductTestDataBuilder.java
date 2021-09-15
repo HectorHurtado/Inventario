@@ -3,12 +3,16 @@ package com.ceiba.product.servicio.testdatabuilder;
 import com.ceiba.product.modelo.entidad.Product;
 import com.ceiba.usuario.modelo.entidad.Usuario;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 
 public class ProductTestDataBuilder {
 
-    private Long id;
+    private static final String PRODUCT_NAME = "Comida";
+
+    private Long id = 1L;
     private String name;
     private Date date;
     private Float buyPrice;
@@ -16,15 +20,28 @@ public class ProductTestDataBuilder {
     private Date supplyingDate;
 
     public ProductTestDataBuilder() {
-        id = new Long(1);
-        name = "1234";
+
+        SimpleDateFormat sdf = new SimpleDateFormat();
+        Date date = null;
+        try {
+            date = sdf.parse("20/09/2021");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        name = PRODUCT_NAME;
         date = new Date();
-        buyPrice = new Float(8000);
+        buyPrice = 8000F;
         stock = 10;
+        supplyingDate = date;
     }
 
     public ProductTestDataBuilder conId(Long id) {
         this.id = id;
+        return this;
+    }
+
+    public ProductTestDataBuilder conSupplyingDate(Date supplyingDate) {
+        this.supplyingDate = supplyingDate;
         return this;
     }
 

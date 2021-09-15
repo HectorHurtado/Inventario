@@ -4,6 +4,7 @@ import com.ceiba.movement.modelo.entidad.Movement;
 import com.ceiba.usuario.modelo.entidad.Usuario;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class MovementTestDataBuilder {
 
@@ -11,12 +12,14 @@ public class MovementTestDataBuilder {
     private Long idProduct;
     private Integer amount;
     private Float salePrice;
+    private Date saleDate;
 
     public MovementTestDataBuilder() {
-        id = new Long(1);
-        idProduct = new Long(1);
+        id = 1L;
+        idProduct = 1L;
         amount = 1;
-        salePrice = new Float(10000);
+        salePrice = 10000F;
+        saleDate = new Date();
     }
 
 
@@ -25,7 +28,12 @@ public class MovementTestDataBuilder {
         return this;
     }
 
+    public MovementTestDataBuilder conSaleDate(Date saleDate) {
+        this.saleDate = saleDate;
+        return this;
+    }
+
     public Movement build() {
-        return new Movement(id,idProduct, amount,salePrice);
+        return new Movement(id,idProduct, amount,salePrice,saleDate);
     }
 }

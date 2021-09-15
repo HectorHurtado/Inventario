@@ -12,5 +12,6 @@ public class DtoMovement {
     private Long idProduct;
     private Integer amount;
     private Float salePrice;
+    private Date saleDate;
 
 }
