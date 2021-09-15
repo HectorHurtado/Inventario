@@ -32,7 +32,7 @@ public class ServicioCrearMovementTest {
         Date date = null;
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         try {
-            date = sdf.parse("15/09/2021");
+            date = sdf.parse("13/09/2021");
         } catch (ParseException e) {
             e.printStackTrace();
         }
