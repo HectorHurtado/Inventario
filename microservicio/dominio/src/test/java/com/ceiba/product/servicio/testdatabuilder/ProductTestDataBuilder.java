@@ -24,7 +24,7 @@ public class ProductTestDataBuilder {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date date = null;
         try {
-            date = sdf.parse("20/09/2021");
+            date = sdf.parse("18/09/2021");
         } catch (ParseException e) {
             e.printStackTrace();
         }
