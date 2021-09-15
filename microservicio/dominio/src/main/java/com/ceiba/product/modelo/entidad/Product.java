@@ -28,7 +28,7 @@ public class Product {
     private Integer stock;
     private Date supplyingDate;
 
-    public Product(Long id, String name, Date date, Float buyPrice,Integer stock) {
+    public Product(Long id, String name, Date date, Float buyPrice,Integer stock, Date supplyingDate) {
         validarObligatorio(name, SE_DEBE_INGRESAR_EL_NOMBRE_DE_PRODUCTO);
         validarObligatorio(buyPrice, SE_DEBE_INGRESAR_EL_PRECIO_DEL_PRODUCTO);
         validarObligatorio(stock, SE_DEBE_INGRESAR_EL_STOCK_DEL_PRODUCTO);
@@ -38,6 +38,7 @@ public class Product {
         this.date = date;
         this.buyPrice = buyPrice;
         this.stock = stock;
+        this.supplyingDate = supplyingDate;
     }
 
 }

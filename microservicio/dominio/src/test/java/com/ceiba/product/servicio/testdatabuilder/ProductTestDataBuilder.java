@@ -46,6 +46,6 @@ public class ProductTestDataBuilder {
     }
 
     public Product build() {
-        return new Product(id,name, date,buyPrice,stock);
+        return new Product(id,name, date,buyPrice,stock,supplyingDate);
     }
 }
