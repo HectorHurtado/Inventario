@@ -24,36 +24,5 @@ import java.util.Date;
 
 public class ServicioCrearMovementTest {
 
-    @Test
-    public void fechaDeAbastecimiento() {
-        // arrange
-        ProductTestDataBuilder productTestDataBuilder = new ProductTestDataBuilder();
-        Product product = productTestDataBuilder.conId(1L).build();
-        Date date = null;
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            date = sdf.parse("13/09/2021");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        // act - assert
-        Assert.assertEquals(product.getSupplyingDate(), getSupplyingDate(date));
-    }
 
-
-    private Date getSupplyingDate(Date saleDate){
-
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(saleDate);
-            calendar.add(Calendar.DAY_OF_WEEK,3);
-
-            if(calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY){
-                calendar.add(Calendar.DAY_OF_WEEK,2);
-            }
-            if(calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY){
-                calendar.add(Calendar.DAY_OF_WEEK,1);
-            }
-
-            return calendar.getTime();
-    }
 }
