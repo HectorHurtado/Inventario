@@ -28,11 +28,11 @@ public class ProductTestDataBuilder {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        name = PRODUCT_NAME;
-        date = new Date();
-        buyPrice = 8000F;
-        stock = 10;
-        supplyingDate = date;
+        this.name = PRODUCT_NAME;
+        this.date = new Date();
+        this.buyPrice = 8000F;
+        this.stock = 10;
+        this.supplyingDate = date;
     }
 
     public ProductTestDataBuilder conId(Long id) {
@@ -46,6 +46,6 @@ public class ProductTestDataBuilder {
     }
 
     public Product build() {
-        return new Product(id,name, date,buyPrice,stock,supplyingDate);
+        return new Product(this.id,this.name, this.date,this.buyPrice,this.stock,this.supplyingDate);
     }
 }
