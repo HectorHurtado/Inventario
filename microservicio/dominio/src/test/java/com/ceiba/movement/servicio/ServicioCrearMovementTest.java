@@ -29,7 +29,7 @@ public class ServicioCrearMovementTest {
         ProductTestDataBuilder productTestDataBuilder = new ProductTestDataBuilder();
         Product product = productTestDataBuilder.conId(1L).build();
         Date date = null;
-        SimpleDateFormat sdf = new SimpleDateFormat();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/aaaa");
         try {
             date = sdf.parse("15/09/2021");
         } catch (ParseException e) {
