@@ -18,6 +18,7 @@ import com.ceiba.BasePrueba;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -29,7 +30,7 @@ public class ServicioCrearMovementTest {
         ProductTestDataBuilder productTestDataBuilder = new ProductTestDataBuilder();
         Product product = productTestDataBuilder.conId(1L).build();
         Date date = null;
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/aaaa");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         try {
             date = sdf.parse("15/09/2021");
         } catch (ParseException e) {
