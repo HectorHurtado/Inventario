@@ -47,10 +47,10 @@ public class ServicioCrearMovementTest {
             calendar.setTime(saleDate);
             calendar.add(Calendar.DAY_OF_WEEK,3);
 
-            if(calendar.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY){
+            if(calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY){
                 calendar.add(Calendar.DAY_OF_WEEK,2);
             }
-            if(calendar.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY){
+            if(calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY){
                 calendar.add(Calendar.DAY_OF_WEEK,1);
             }
 
