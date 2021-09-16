@@ -1,0 +1,1 @@
+insert into product (name,create_date,buy_price,stock,supplying_date) values (:name, :createDate, :buyPrice, :stock, :supplyingDate)
