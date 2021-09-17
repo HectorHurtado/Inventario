@@ -35,18 +35,21 @@ public class ServicioCrearMovimientoTest {
     public void crearMovimientoTest() {
         // arrange
         Movimiento movimiento = new MovimientoTestDataBuilder().build();
-        Long id = 1L;
+
         RepositorioMovimiento repositorioMovimiento = Mockito.mock(RepositorioMovimiento.class);
-        Mockito.when(repositorioMovimiento.crear(Mockito.any())).thenReturn(id);
+        Mockito.when(repositorioMovimiento.crear(Mockito.any())).thenReturn(ID);
+
         RepositorioProducto repositorioProducto = Mockito.mock(RepositorioProducto.class);
-        Mockito.when(repositorioProducto.crear(Mockito.any())).thenReturn(id);
+        Mockito.when(repositorioProducto.crear(Mockito.any())).thenReturn(ID);
+
         DtoProducto dtoProducto = new DtoProducto(1L,NOMBRE,FECHA_CREACION,PRECIO_COMPRA,STOCK,null);
         DaoProducto daoProducto = Mockito.mock(DaoProducto.class);
         Mockito.when(daoProducto.buscarPorId(Mockito.anyLong())).thenReturn(dtoProducto);
+
         ServicioCrearMovimiento servicioCrearMovimiento = new ServicioCrearMovimiento(repositorioMovimiento, repositorioProducto, daoProducto);
         // act - assert
         Long idRespuesta = servicioCrearMovimiento.ejecutar(movimiento);
-        Assert.assertEquals(idRespuesta,id);
+        Assert.assertEquals(idRespuesta,movimiento.getId());
 
     }
 
@@ -55,18 +58,21 @@ public class ServicioCrearMovimientoTest {
     public void crearMovimientoSinStockTest() {
         // arrange
         Movimiento movimiento = new MovimientoTestDataBuilder().build();
-        Long id = 1L;
+
         RepositorioMovimiento repositorioMovimiento = Mockito.mock(RepositorioMovimiento.class);
-        Mockito.when(repositorioMovimiento.crear(Mockito.any())).thenReturn(id);
+        Mockito.when(repositorioMovimiento.crear(Mockito.any())).thenReturn(ID);
+
         RepositorioProducto repositorioProducto = Mockito.mock(RepositorioProducto.class);
-        Mockito.when(repositorioProducto.crear(Mockito.any())).thenReturn(id);
+        Mockito.when(repositorioProducto.crear(Mockito.any())).thenReturn(ID);
+
         DtoProducto dtoProducto = new DtoProducto(1L,NOMBRE,FECHA_CREACION,PRECIO_COMPRA,SIN_STOCK,null);
         DaoProducto daoProducto = Mockito.mock(DaoProducto.class);
         Mockito.when(daoProducto.buscarPorId(Mockito.anyLong())).thenReturn(dtoProducto);
+
         ServicioCrearMovimiento servicioCrearMovimiento = new ServicioCrearMovimiento(repositorioMovimiento, repositorioProducto, daoProducto);
         // act - assert
         Long idRespuesta = servicioCrearMovimiento.ejecutar(movimiento);
-        Assert.assertEquals(idRespuesta,id);
+        Assert.assertEquals(idRespuesta,movimiento.getId());
 
     }
 }

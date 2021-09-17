@@ -16,6 +16,8 @@ import java.util.Date;
 
 public class ServicioCrearProductoTest {
 
+    private static final Long ID = 1L;
+
     @Test
     public void validarProductoExistenciaPreviaTest() {
         // arrange
@@ -27,6 +29,20 @@ public class ServicioCrearProductoTest {
         BasePrueba.assertThrows(() -> servicioCrearProducto.ejecutar(producto), ExcepcionDuplicidad.class,"El producto ya existe en el sistema");
     }
 
+
+    @Test
+    public void crearProductoTest() {
+        // arrange
+        Producto producto = new ProductoTestDataBuilder().conId(1L).build();
+
+        RepositorioProducto repositorioProducto = Mockito.mock(RepositorioProducto.class);
+        Mockito.when(repositorioProducto.crear(Mockito.any())).thenReturn(ID);
+
+        ServicioCrearProducto servicioCrearProducto = new ServicioCrearProducto(repositorioProducto);
+        // act - assert
+        Long idRespuesta = servicioCrearProducto.ejecutar(producto);
+        Assert.assertEquals(idRespuesta, producto.getId());
+    }
 
     @Test
     public void fechaDeAbastecimientoTresDiasDespuesSabadoTest() {
