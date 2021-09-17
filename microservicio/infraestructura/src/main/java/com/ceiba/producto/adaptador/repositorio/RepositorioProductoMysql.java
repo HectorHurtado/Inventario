@@ -24,9 +24,6 @@ public class RepositorioProductoMysql implements RepositorioProducto {
     @SqlStatement(namespace="producto", value="existe")
     private static String sqlExiste;
 
-    @SqlStatement(namespace="producto", value="existeExcluyendoId")
-    private static String sqlExisteExcluyendoId;
-
 
     public RepositorioProductoMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
