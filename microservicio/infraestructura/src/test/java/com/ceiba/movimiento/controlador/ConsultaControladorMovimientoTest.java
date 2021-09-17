@@ -32,7 +32,6 @@ public class ConsultaControladorMovimientoTest {
     @Autowired
     private MockMvc mocMvc;
 
-
     @Test
     public void listar() throws Exception {
         // arrange
@@ -41,7 +40,7 @@ public class ConsultaControladorMovimientoTest {
         mocMvc.perform(get("/movimientos")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].precioVenta", is(10000.0)));
     }
 
