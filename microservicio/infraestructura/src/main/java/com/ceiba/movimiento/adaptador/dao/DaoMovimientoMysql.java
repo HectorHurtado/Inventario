@@ -1,6 +1,5 @@
 package com.ceiba.movimiento.adaptador.dao;
 
-import com.ceiba.ComandoRespuesta;
 import com.ceiba.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
 import com.ceiba.infraestructura.jdbc.sqlstatement.SqlStatement;
 import com.ceiba.movimiento.modelo.dto.DtoMovimiento;

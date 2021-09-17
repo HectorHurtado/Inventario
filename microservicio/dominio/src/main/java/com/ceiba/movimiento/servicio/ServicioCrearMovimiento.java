@@ -35,12 +35,12 @@ public class ServicioCrearMovimiento {
         Producto producto = new Producto(dtoProducto.getId(), dtoProducto.getNombre(),
                 dtoProducto.getFechaCreacion(), dtoProducto.getPrecioCompra(),
                 dtoProducto.getStock(), dtoProducto.getFechaAbastecimiento());
-        producto = obtenerProductoParaActualizar(producto, movimiento.getFechaVenta());
+        setearFechaDeAbastecimientoProducto(producto, movimiento.getFechaVenta());
         repositorioProducto.actualizar(producto);
     }
 
 
-    private Producto obtenerProductoParaActualizar(Producto producto, Date fechaVenta){
+    private void setearFechaDeAbastecimientoProducto(Producto producto, Date fechaVenta){
 
         if(producto.getStock().equals(0)){
             Calendar calendar = Calendar.getInstance();
@@ -57,7 +57,6 @@ public class ServicioCrearMovimiento {
             producto.setFechaAbastecimiento( calendar.getTime());
         }
 
-        return producto;
     }
 
 }

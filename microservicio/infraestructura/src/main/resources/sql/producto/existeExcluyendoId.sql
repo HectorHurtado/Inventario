@@ -1,1 +1,0 @@
-select count(1) from producto where id <> :id and nombre = :nombre

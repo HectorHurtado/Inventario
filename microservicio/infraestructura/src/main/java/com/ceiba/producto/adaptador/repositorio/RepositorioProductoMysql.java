@@ -59,14 +59,4 @@ public class RepositorioProductoMysql implements RepositorioProducto {
     }
 
 
-    @Override
-    public boolean existeExcluyendoId(Long id, String nombre) {
-        MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("id", id);
-        paramSource.addValue("nombre", nombre);
-
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExisteExcluyendoId,paramSource, Boolean.class);
-    }
-
-
 }
