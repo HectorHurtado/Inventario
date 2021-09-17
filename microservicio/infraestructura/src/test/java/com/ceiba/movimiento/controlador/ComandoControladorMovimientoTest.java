@@ -1,8 +1,8 @@
 package com.ceiba.movimiento.controlador;
 
 import com.ceiba.ApplicationMock;
-import com.ceiba.movimiento.comando.ComandoMovement;
-import com.ceiba.movimiento.testdatabuilder.ComandoMovementTestDataBuilder;
+import com.ceiba.movimiento.comando.ComandoMovimiento;
+import com.ceiba.movimiento.testdatabuilder.ComandoMovimientoTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,8 +19,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes= ApplicationMock.class)
-@WebMvcTest(ComandoControladorMovement.class)
-public class ComandoControladorMovementTest {
+@WebMvcTest(ComandoControladorMovimiento.class)
+public class ComandoControladorMovimientoTest {
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -31,10 +31,10 @@ public class ComandoControladorMovementTest {
     @Test
     public void crear() throws Exception{
         // arrange
-        ComandoMovement movement = new ComandoMovementTestDataBuilder().build();
+        ComandoMovimiento movement = new ComandoMovimientoTestDataBuilder().conId(2L).conIdProducto(1L).build();
 
         // act - assert
-        mocMvc.perform(post("/movements")
+        mocMvc.perform(post("/movimientos")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(movement)))
                 .andExpect(status().isOk())

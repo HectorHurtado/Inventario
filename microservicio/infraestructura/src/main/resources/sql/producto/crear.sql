@@ -1,0 +1,1 @@
+insert into producto (nombre,fecha_creacion,precio_compra,stock, fecha_abastecimiento) values (:nombre, :fechaCreacion, :precioCompra, :stock, :fechaAbastecimiento)

@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/productos")
 @Api(tags={"Controlador consulta productos"})
-public class ConsultaControladorProduct {
+public class ConsultaControladorProducto {
 
     private final ManejadorListarProducts manejadorListarProducts;
 
-    public ConsultaControladorProduct(ManejadorListarProducts manejadorListarProducts) {
+    public ConsultaControladorProducto(ManejadorListarProducts manejadorListarProducts) {
         this.manejadorListarProducts = manejadorListarProducts;
     }
 

@@ -1,0 +1,1 @@
+insert into movimiento (id_producto, cantidad, precio_venta, fecha_venta) values (:idProducto, :cantidad, :precioVenta, :fechaVenta)

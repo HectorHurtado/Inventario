@@ -11,7 +11,7 @@ public class RepositorioMovimientoMysql implements RepositorioMovimiento {
 
     private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
-    @SqlStatement(namespace="movement", value="crear")
+    @SqlStatement(namespace="movimiento", value="crear")
     private static String sqlCrear;
 
     public RepositorioMovimientoMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
@@ -19,9 +19,9 @@ public class RepositorioMovimientoMysql implements RepositorioMovimiento {
     }
 
     @Override
-    public Long crear(Movimiento movement) {
+    public Long crear(Movimiento movimiento) {
 
-        return this.customNamedParameterJdbcTemplate.crear(movement, sqlCrear);
+        return this.customNamedParameterJdbcTemplate.crear(movimiento, sqlCrear);
     }
 
 

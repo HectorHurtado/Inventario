@@ -8,19 +8,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
-public class MapeoProduct implements RowMapper<DtoProducto>, MapperResult {
+public class MapeoProducto implements RowMapper<DtoProducto>, MapperResult {
 
     @Override
     public DtoProducto mapRow(ResultSet resultSet, int rowNum) throws SQLException {
 
         Long id = resultSet.getLong("id");
-        String name = resultSet.getString("name");
-        Date createDate = resultSet.getDate("create_date");
-        Float buyPrice = resultSet.getFloat("buy_price");
+        String nombre = resultSet.getString("nombre");
+        Date fechaCreacion = resultSet.getDate("fecha_creacion");
+        Float precioCompra = resultSet.getFloat("precio_compra");
         Integer stock = resultSet.getInt("stock");
-        Date supplyingDate = resultSet.getDate("supplying_date");
+        Date fechaAbastecimiento = resultSet.getDate("fecha_abastecimiento");
 
-        return new DtoProducto(id,name,createDate,buyPrice,stock,supplyingDate);
+        return new DtoProducto(id,nombre,fechaCreacion,precioCompra,stock,fechaAbastecimiento);
 
     }
 

@@ -1,3 +1,3 @@
 delete 
-from product
+from producto
 where id = :id

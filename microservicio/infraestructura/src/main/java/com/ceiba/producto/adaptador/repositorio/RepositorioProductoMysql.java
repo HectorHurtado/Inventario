@@ -12,19 +12,19 @@ public class RepositorioProductoMysql implements RepositorioProducto {
 
     private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
-    @SqlStatement(namespace="product", value="crear")
+    @SqlStatement(namespace="producto", value="crear")
     private static String sqlCrear;
 
-    @SqlStatement(namespace="product", value="actualizar")
+    @SqlStatement(namespace="producto", value="actualizar")
     private static String sqlActualizar;
 
-    @SqlStatement(namespace="product", value="eliminar")
+    @SqlStatement(namespace="producto", value="eliminar")
     private static String sqlEliminar;
 
-    @SqlStatement(namespace="product", value="existe")
+    @SqlStatement(namespace="producto", value="existe")
     private static String sqlExiste;
 
-    @SqlStatement(namespace="product", value="existeExcluyendoId")
+    @SqlStatement(namespace="producto", value="existeExcluyendoId")
     private static String sqlExisteExcluyendoId;
 
 
@@ -51,19 +51,19 @@ public class RepositorioProductoMysql implements RepositorioProducto {
     }
 
     @Override
-    public boolean existe(String name) {
+    public boolean existe(String nombre) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("name", name);
+        paramSource.addValue("nombre", nombre);
 
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExiste,paramSource, Boolean.class);
     }
 
 
     @Override
-    public boolean existeExcluyendoId(Long id, String name) {
+    public boolean existeExcluyendoId(Long id, String nombre) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("id", id);
-        paramSource.addValue("name", name);
+        paramSource.addValue("nombre", nombre);
 
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExisteExcluyendoId,paramSource, Boolean.class);
     }

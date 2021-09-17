@@ -1,5 +1,6 @@
 package com.ceiba.movimiento.adaptador.dao;
 
+import com.ceiba.ComandoRespuesta;
 import com.ceiba.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
 import com.ceiba.infraestructura.jdbc.sqlstatement.SqlStatement;
 import com.ceiba.movimiento.modelo.dto.DtoMovimiento;
@@ -15,10 +16,10 @@ public class DaoMovimientoMysql implements DaoMovimiento {
 
     private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
-    @SqlStatement(namespace="movement", value="listar")
+    @SqlStatement(namespace="movimiento", value="listar")
     private static String sqlListar;
 
-    @SqlStatement(namespace="movement", value="getProfit")
+    @SqlStatement(namespace="movimiento", value="obtenerGanancia")
     private static String sqlGetProfit;
 
     public DaoMovimientoMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
@@ -27,14 +28,14 @@ public class DaoMovimientoMysql implements DaoMovimiento {
 
     @Override
     public List<DtoMovimiento> listar() {
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlListar, new MapeoMovement());
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlListar, new MapeoMovimiento());
     }
 
     @Override
-    public Float obtenerGanancia(Date date) {
+    public Float obtenerGanancia(Date fecha) {
 
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("date", date);
+        paramSource.addValue("fecha", fecha);
 
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlGetProfit, paramSource,Float.class);
     }

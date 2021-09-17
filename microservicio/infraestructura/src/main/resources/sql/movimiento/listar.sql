@@ -1,0 +1,2 @@
+select id,id_producto,cantidad,precio_venta,fecha_venta
+from movimiento

@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes= ApplicationMock.class)
-@WebMvcTest(ConsultaControladorProduct.class)
+@WebMvcTest(ConsultaControladorProducto.class)
 public class ConsultaControladorProductoTest {
 
     @Autowired
@@ -33,7 +33,7 @@ public class ConsultaControladorProductoTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].name", is("Comida")));
+                .andExpect(jsonPath("$[0].nombre", is("Comida")));
     }
 
 

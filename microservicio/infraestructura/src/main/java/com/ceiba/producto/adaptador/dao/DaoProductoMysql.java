@@ -14,11 +14,11 @@ public class DaoProductoMysql implements DaoProducto {
 
     private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
-    @SqlStatement(namespace = "product", value = "listar")
+    @SqlStatement(namespace = "producto", value = "listar")
     private static String sqlListar;
 
-    @SqlStatement(namespace = "product", value = "findById")
-    private static String sqlFindById;
+    @SqlStatement(namespace = "producto", value = "buscarPorId")
+    private static String sqlBuscarPorId;
 
     public DaoProductoMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
@@ -26,7 +26,7 @@ public class DaoProductoMysql implements DaoProducto {
 
     @Override
     public List<DtoProducto> listar() {
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlListar, new MapeoProduct());
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlListar, new MapeoProducto());
     }
 
     @Override
@@ -35,6 +35,6 @@ public class DaoProductoMysql implements DaoProducto {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("id", id);
 
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlFindById, paramSource, DtoProducto.class);
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlBuscarPorId, paramSource,  new MapeoProducto());
     }
 }

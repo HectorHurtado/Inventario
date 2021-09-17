@@ -1,4 +1,4 @@
-package com.ceiba.producto.comando;
+package com.ceiba.movimiento.comando;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,12 +11,11 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ComandoProduct {
+public class ComandoMovimiento {
 
     private Long id;
-    private String name;
-    private Date createDate;
-    private Float buyPrice;
-    private Integer stock;
-    private Date supplyingDate;
+    private Long idProducto;
+    private Integer cantidad;
+    private Float precioVenta;
+    private Date fechaVenta;
 }

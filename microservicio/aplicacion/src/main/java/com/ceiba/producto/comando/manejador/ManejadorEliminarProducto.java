@@ -6,15 +6,15 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class ManejadorEliminarProduct implements ManejadorComando<Long> {
+public class ManejadorEliminarProducto implements ManejadorComando<Long> {
 
     private final ServicioEliminarProducto servicioEliminarProducto;
 
-    public ManejadorEliminarProduct(ServicioEliminarProducto servicioEliminarProducto) {
+    public ManejadorEliminarProducto(ServicioEliminarProducto servicioEliminarProducto) {
         this.servicioEliminarProducto = servicioEliminarProducto;
     }
 
-    public void ejecutar(Long idProduct) {
-        this.servicioEliminarProducto.ejecutar(idProduct);
+    public void ejecutar(Long idProducto) {
+        this.servicioEliminarProducto.ejecutar(idProducto);
     }
 }
