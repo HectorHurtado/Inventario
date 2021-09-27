@@ -14,7 +14,7 @@ spring:
    datasource:
       driver-class-name: org.h2.Driver
       type: com.zaxxer.hikari.HikariDataSource
-      jdbcUrl: jdbc:h2:mem:~/inventario
+      jdbcUrl: jdbc:h2:mem:~/Inventario
       username: root
       password:
       hikari:
