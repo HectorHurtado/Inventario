@@ -19,7 +19,7 @@ public class DaoMovimientoMysql implements DaoMovimiento {
     private static String sqlListar;
 
     @SqlStatement(namespace="movimiento", value="obtenerGanancia")
-    private static String sqlGetProfit;
+    private static String sqlObtenerGanancia;
 
     public DaoMovimientoMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
@@ -31,11 +31,12 @@ public class DaoMovimientoMysql implements DaoMovimiento {
     }
 
     @Override
-    public Float obtenerGanancia(Date fecha) {
+    public Float obtenerGanancia(Date fechaInicial, Date fechaFinal) {
 
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("fecha", fecha);
+        paramSource.addValue("fechaInicial", fechaInicial);
+        paramSource.addValue("fechaFinal", fechaFinal);
 
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlGetProfit, paramSource,Float.class);
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlObtenerGanancia, paramSource,Float.class);
     }
 }

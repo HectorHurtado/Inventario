@@ -44,62 +44,6 @@ public class ServicioCrearProductoTest {
         Assert.assertEquals(idRespuesta, producto.getId());
     }
 
-    @Test
-    public void fechaDeAbastecimientoTresDiasDespuesSabadoTest() {
-        // arrange
-        ProductoTestDataBuilder productoTestDataBuilder = new ProductoTestDataBuilder();
-        Producto producto = productoTestDataBuilder.conId(1L).conFechaAbastecimiento("20/09/2021").build();
-        Date date = obtieneFechaParseada("15/09/2021");
-        // act - assert
-        Assert.assertEquals(producto.getFechaAbastecimiento(), obtenerFechaDeAbastecimiento(date));
-    }
 
-    @Test
-    public void fechaDeAbastecimientoTresDiasDespuesDomingoTest() {
-        // arrange
-        ProductoTestDataBuilder productoTestDataBuilder = new ProductoTestDataBuilder();
-        Producto producto = productoTestDataBuilder.conId(1L).conFechaAbastecimiento("20/09/2021").build();
-        Date date = obtieneFechaParseada("16/09/2021");
-        // act - assert
-        Assert.assertEquals(producto.getFechaAbastecimiento(), obtenerFechaDeAbastecimiento(date));
-    }
 
-    @Test
-    public void fechaDeAbastecimientoTresDiasDespuesEntreSemanaTest() {
-        // arrange
-        ProductoTestDataBuilder productoTestDataBuilder = new ProductoTestDataBuilder();
-        Producto producto = productoTestDataBuilder.conId(1L).conFechaAbastecimiento("16/09/2021").build();
-        Date date = obtieneFechaParseada("13/09/2021");
-        // act - assert
-        Assert.assertEquals(producto.getFechaAbastecimiento(), obtenerFechaDeAbastecimiento(date));
-    }
-
-    private Date obtieneFechaParseada(String fecha){
-
-        Date date = null;
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            date = sdf.parse(fecha);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        return date;
-    }
-
-    private Date obtenerFechaDeAbastecimiento(Date fechaVenta){
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(fechaVenta);
-        calendar.add(Calendar.DAY_OF_WEEK,3);
-
-        if(calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY){
-            calendar.add(Calendar.DAY_OF_WEEK,2);
-        }
-        if(calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY){
-            calendar.add(Calendar.DAY_OF_WEEK,1);
-        }
-
-        return calendar.getTime();
-    }
 }

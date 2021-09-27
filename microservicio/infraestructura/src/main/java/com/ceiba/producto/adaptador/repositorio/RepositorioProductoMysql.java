@@ -21,6 +21,9 @@ public class RepositorioProductoMysql implements RepositorioProducto {
     @SqlStatement(namespace="producto", value="eliminar")
     private static String sqlEliminar;
 
+    @SqlStatement(namespace="movimiento", value="eliminar")
+    private static String sqlEliminarMovimiento;
+
     @SqlStatement(namespace="producto", value="existe")
     private static String sqlExiste;
 
@@ -43,7 +46,9 @@ public class RepositorioProductoMysql implements RepositorioProducto {
     public void eliminar(Long id) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("id", id);
+        paramSource.addValue("idProduct", id);
 
+        this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminarMovimiento, paramSource);
         this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminar, paramSource);
     }
 

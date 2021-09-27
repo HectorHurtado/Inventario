@@ -4,6 +4,7 @@ package com.ceiba.producto.modelo.entidad;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import static com.ceiba.dominio.ValidadorArgumento.validarObligatorio;

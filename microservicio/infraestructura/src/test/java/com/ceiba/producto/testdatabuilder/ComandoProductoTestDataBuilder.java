@@ -34,6 +34,11 @@ public class ComandoProductoTestDataBuilder {
         return this;
     }
 
+    public ComandoProductoTestDataBuilder conPrecioCompra(Float precioCompra) {
+        this.precioCompra = precioCompra;
+        return this;
+    }
+
     public ComandoProducto build() {
         return new ComandoProducto(this.id,this.nombre, this.fechaCreacion,this.precioCompra,this.stock,this.fechaAbastecimiento);
     }

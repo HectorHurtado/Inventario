@@ -26,8 +26,12 @@ public class MovimientoTestDataBuilder {
         return this;
     }
 
-    public MovimientoTestDataBuilder conSaleDate(Date saleDate) {
+    public MovimientoTestDataBuilder conPrecioVenta(Date saleDate) {
         this.fechaVenta = saleDate;
+        return this;
+    }
+    public MovimientoTestDataBuilder conCantidad(int cantidad) {
+        this.cantidad = cantidad;
         return this;
     }
 

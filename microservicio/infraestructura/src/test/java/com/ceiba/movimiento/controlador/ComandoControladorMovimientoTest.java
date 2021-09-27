@@ -31,7 +31,7 @@ public class ComandoControladorMovimientoTest {
     @Test
     public void crear() throws Exception{
         // arrange
-        ComandoMovimiento movement = new ComandoMovimientoTestDataBuilder().conId(2L).conIdProducto(1L).build();
+        ComandoMovimiento movement = new ComandoMovimientoTestDataBuilder().conId(2L).conIdProducto(2L).build();
 
         // act - assert
         mocMvc.perform(post("/movimientos")

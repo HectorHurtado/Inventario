@@ -44,6 +44,11 @@ public class ProductoTestDataBuilder {
         return this;
     }
 
+    public ProductoTestDataBuilder conStock(int stock) {
+        this.stock = stock;
+        return this;
+    }
+
     public ProductoTestDataBuilder conSupplyingDate(Date supplyingDate) {
         this.fechaAbastecimiento = supplyingDate;
         return this;

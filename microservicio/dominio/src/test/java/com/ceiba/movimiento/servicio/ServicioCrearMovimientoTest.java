@@ -2,6 +2,7 @@ package com.ceiba.movimiento.servicio;
 
 import com.ceiba.BasePrueba;
 import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
+import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 import com.ceiba.movimiento.modelo.entidad.Movimiento;
 import com.ceiba.movimiento.puerto.repositorio.RepositorioMovimiento;
 import com.ceiba.movimiento.servicio.testdatabuilder.MovimientoTestDataBuilder;
@@ -27,7 +28,8 @@ public class ServicioCrearMovimientoTest {
     private static final Date FECHA_CREACION = new Date();
     private static final Float PRECIO_COMPRA = 8000F;
     private static final Integer STOCK = 2;
-    private static final Integer SIN_STOCK = 0;
+    private static final Integer CANTIDAD_VENTA = 2;
+    private static final Integer CANTIDAD_SUPERIOR_A_STOCK = 10;
 
 
 
@@ -55,9 +57,9 @@ public class ServicioCrearMovimientoTest {
 
 
     @Test
-    public void crearMovimientoSinStockTest() {
+    public void crearMovimientoConCantidadMayorAlStockTest() {
         // arrange
-        Movimiento movimiento = new MovimientoTestDataBuilder().build();
+        Movimiento movimiento = new MovimientoTestDataBuilder().conCantidad(CANTIDAD_SUPERIOR_A_STOCK).build();
 
         RepositorioMovimiento repositorioMovimiento = Mockito.mock(RepositorioMovimiento.class);
         Mockito.when(repositorioMovimiento.crear(Mockito.any())).thenReturn(ID);
@@ -65,14 +67,104 @@ public class ServicioCrearMovimientoTest {
         RepositorioProducto repositorioProducto = Mockito.mock(RepositorioProducto.class);
         Mockito.when(repositorioProducto.crear(Mockito.any())).thenReturn(ID);
 
-        DtoProducto dtoProducto = new DtoProducto(1L,NOMBRE,FECHA_CREACION,PRECIO_COMPRA,SIN_STOCK,null);
+        DtoProducto dtoProducto = new DtoProducto(1L,NOMBRE,FECHA_CREACION,PRECIO_COMPRA,STOCK,null);
         DaoProducto daoProducto = Mockito.mock(DaoProducto.class);
         Mockito.when(daoProducto.buscarPorId(Mockito.anyLong())).thenReturn(dtoProducto);
 
         ServicioCrearMovimiento servicioCrearMovimiento = new ServicioCrearMovimiento(repositorioMovimiento, repositorioProducto, daoProducto);
         // act - assert
-        Long idRespuesta = servicioCrearMovimiento.ejecutar(movimiento);
-        Assert.assertEquals(idRespuesta,movimiento.getId());
+        BasePrueba.assertThrows(() -> servicioCrearMovimiento.ejecutar(movimiento), ExcepcionValorInvalido.class,"La cantidad no puede ser superior al stock del producto");
 
+    }
+
+    @Test
+    public void fechaDeAbastecimientoTresDiasDespuesSabadoTest() {
+
+        // arrange
+        RepositorioMovimiento repositorioMovimiento = Mockito.mock(RepositorioMovimiento.class);
+        Mockito.when(repositorioMovimiento.crear(Mockito.any())).thenReturn(ID);
+
+        RepositorioProducto repositorioProducto = Mockito.mock(RepositorioProducto.class);
+        Mockito.when(repositorioProducto.crear(Mockito.any())).thenReturn(ID);
+
+        DtoProducto dtoProducto = new DtoProducto(1L,NOMBRE,FECHA_CREACION,PRECIO_COMPRA,STOCK,null);
+        DaoProducto daoProducto = Mockito.mock(DaoProducto.class);
+        Mockito.when(daoProducto.buscarPorId(Mockito.anyLong())).thenReturn(dtoProducto);
+
+        ServicioCrearMovimiento servicioCrearMovimiento = new ServicioCrearMovimiento(repositorioMovimiento, repositorioProducto, daoProducto);
+
+        ProductoTestDataBuilder productoTestDataBuilder = new ProductoTestDataBuilder();
+        Producto producto = productoTestDataBuilder.conId(1L).conStock(STOCK).build();
+        servicioCrearMovimiento.actualizarStockProducto(producto,CANTIDAD_VENTA);
+        servicioCrearMovimiento.actualizarFechaAbastecimiento(producto,obtieneFechaParseada("29/09/2021"));
+        Date date = obtieneFechaParseada("04/10/2021");
+        // act - assert
+        Assert.assertEquals(date, producto.getFechaAbastecimiento());
+
+    }
+
+    @Test
+    public void fechaDeAbastecimientoTresDiasDespuesDomingoTest() {
+
+        // arrange
+        RepositorioMovimiento repositorioMovimiento = Mockito.mock(RepositorioMovimiento.class);
+        Mockito.when(repositorioMovimiento.crear(Mockito.any())).thenReturn(ID);
+
+        RepositorioProducto repositorioProducto = Mockito.mock(RepositorioProducto.class);
+        Mockito.when(repositorioProducto.crear(Mockito.any())).thenReturn(ID);
+
+        DtoProducto dtoProducto = new DtoProducto(1L,NOMBRE,FECHA_CREACION,PRECIO_COMPRA,STOCK,null);
+        DaoProducto daoProducto = Mockito.mock(DaoProducto.class);
+        Mockito.when(daoProducto.buscarPorId(Mockito.anyLong())).thenReturn(dtoProducto);
+
+        ServicioCrearMovimiento servicioCrearMovimiento = new ServicioCrearMovimiento(repositorioMovimiento, repositorioProducto, daoProducto);
+
+        ProductoTestDataBuilder productoTestDataBuilder = new ProductoTestDataBuilder();
+        Producto producto = productoTestDataBuilder.conId(1L).conStock(STOCK).build();
+        servicioCrearMovimiento.actualizarStockProducto(producto,CANTIDAD_VENTA);
+        servicioCrearMovimiento.actualizarFechaAbastecimiento(producto,obtieneFechaParseada("30/09/2021"));
+        Date date = obtieneFechaParseada("04/10/2021");
+        // act - assert
+        Assert.assertEquals(date, producto.getFechaAbastecimiento());
+
+    }
+
+    @Test
+    public void fechaDeAbastecimientoTresDiasDespuesEntreSemanaTest() {
+
+        // arrange
+        RepositorioMovimiento repositorioMovimiento = Mockito.mock(RepositorioMovimiento.class);
+        Mockito.when(repositorioMovimiento.crear(Mockito.any())).thenReturn(ID);
+
+        RepositorioProducto repositorioProducto = Mockito.mock(RepositorioProducto.class);
+        Mockito.when(repositorioProducto.crear(Mockito.any())).thenReturn(ID);
+
+        DtoProducto dtoProducto = new DtoProducto(1L,NOMBRE,FECHA_CREACION,PRECIO_COMPRA,STOCK,null);
+        DaoProducto daoProducto = Mockito.mock(DaoProducto.class);
+        Mockito.when(daoProducto.buscarPorId(Mockito.anyLong())).thenReturn(dtoProducto);
+
+        ServicioCrearMovimiento servicioCrearMovimiento = new ServicioCrearMovimiento(repositorioMovimiento, repositorioProducto, daoProducto);
+
+        ProductoTestDataBuilder productoTestDataBuilder = new ProductoTestDataBuilder();
+        Producto producto = productoTestDataBuilder.conId(1L).conStock(STOCK).build();
+        servicioCrearMovimiento.actualizarStockProducto(producto,CANTIDAD_VENTA);
+        servicioCrearMovimiento.actualizarFechaAbastecimiento(producto,obtieneFechaParseada("27/09/2021"));
+        Date date = obtieneFechaParseada("30/09/2021");
+        // act - assert
+        Assert.assertEquals(date, producto.getFechaAbastecimiento());
+
+    }
+
+    private Date obtieneFechaParseada(String fecha){
+
+        Date date = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            date = sdf.parse(fecha);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return date;
     }
 }

@@ -54,7 +54,7 @@ public class ComandoControladorProductoTest {
                 .andExpect(status().isOk());
     }
 
-    @Test
+   @Test
     public void eliminar() throws Exception {
         // arrange
         Long id = 2L;

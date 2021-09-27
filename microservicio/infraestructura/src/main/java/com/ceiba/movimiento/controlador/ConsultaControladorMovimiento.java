@@ -1,6 +1,7 @@
 package com.ceiba.movimiento.controlador;
 
 import com.ceiba.ComandoRespuesta;
+import com.ceiba.movimiento.comando.ComandoMovimiento;
 import com.ceiba.movimiento.consulta.ManejadorObtenerGananciaMovimientos;
 import com.ceiba.movimiento.consulta.ManejadorListarMovimientos;
 import com.ceiba.movimiento.modelo.dto.DtoMovimiento;
@@ -31,10 +32,10 @@ public class ConsultaControladorMovimiento {
     }
 
 
-    @GetMapping(value = "/obtenerGanancia")
+    @GetMapping(value = "/ganancia")
     @ApiOperation("obtener ganancias")
-    public ComandoRespuesta<Float> getProfit(@RequestBody Date fecha) {
-        return this.manejadorObtenerGananciaMovimientos.ejecutar(fecha);
+    public ComandoRespuesta<Float> getProfit(@RequestBody ComandoMovimiento comandoMovimiento) {
+        return this.manejadorObtenerGananciaMovimientos.ejecutar(comandoMovimiento);
     }
 
 

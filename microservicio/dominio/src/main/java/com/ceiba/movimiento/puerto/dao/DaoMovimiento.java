@@ -17,5 +17,5 @@ public interface DaoMovimiento {
      * Permite obtener ganancias a partir de una fecha
      * @return valor ganancias
      */
-    Float obtenerGanancia(Date fecha);
+    Float obtenerGanancia(Date fechaInicial,Date fechaFinal);
 }

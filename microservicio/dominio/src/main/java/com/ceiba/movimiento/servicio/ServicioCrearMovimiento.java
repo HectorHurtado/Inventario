@@ -1,5 +1,6 @@
 package com.ceiba.movimiento.servicio;
 
+import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 import com.ceiba.movimiento.modelo.entidad.Movimiento;
 import com.ceiba.movimiento.puerto.repositorio.RepositorioMovimiento;
 import com.ceiba.producto.modelo.dto.DtoProducto;
@@ -35,28 +36,39 @@ public class ServicioCrearMovimiento {
         Producto producto = new Producto(dtoProducto.getId(), dtoProducto.getNombre(),
                 dtoProducto.getFechaCreacion(), dtoProducto.getPrecioCompra(),
                 dtoProducto.getStock(), dtoProducto.getFechaAbastecimiento());
-        setearFechaDeAbastecimientoProducto(producto, movimiento.getFechaVenta());
+
+        actualizarStockProducto(producto, movimiento.getCantidad());
+        actualizarFechaAbastecimiento(producto, movimiento.getFechaVenta());
+
         repositorioProducto.actualizar(producto);
     }
 
+    public void actualizarStockProducto(Producto producto, int cantidadVenta){
+        if((producto.getStock() - cantidadVenta) < 0)
+        {
+            throw new ExcepcionValorInvalido("La cantidad no puede ser superior al stock del producto");
+        }
+        producto.setStock(producto.getStock() - cantidadVenta);
 
-    private void setearFechaDeAbastecimientoProducto(Producto producto, Date fechaVenta){
+    }
 
-        if(producto.getStock().equals(0)){
+
+    public void actualizarFechaAbastecimiento(Producto producto, Date fechaVenta){
+
+        if(producto.getStock() == 0){
+
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(fechaVenta);
             calendar.add(Calendar.DAY_OF_WEEK,3);
 
-            if(calendar.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY){
+            if(calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY){
                 calendar.add(Calendar.DAY_OF_WEEK,2);
             }
-            if(calendar.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY){
+            if(calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY){
                 calendar.add(Calendar.DAY_OF_WEEK,1);
             }
-
-            producto.setFechaAbastecimiento( calendar.getTime());
+            producto.setFechaAbastecimiento(calendar.getTime());
         }
-
     }
 
 }

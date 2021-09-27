@@ -30,6 +30,21 @@ public class ComandoMovimientoTestDataBuilder {
         return this;
     }
 
+    public ComandoMovimientoTestDataBuilder conCantidad(int cantidad) {
+        this.cantidad = cantidad;
+        return this;
+    }
+
+    public ComandoMovimientoTestDataBuilder conIdPrecioVenta(Float precioVenta) {
+        this.precioVenta = precioVenta;
+        return this;
+    }
+
+    public ComandoMovimientoTestDataBuilder conFechaVenta(Date fechaVenta) {
+        this.fechaVenta = fechaVenta;
+        return this;
+    }
+
     public ComandoMovimiento build() {
         return new ComandoMovimiento(this.id,this.idProducto,this.cantidad,this.precioVenta,this.fechaVenta);
     }

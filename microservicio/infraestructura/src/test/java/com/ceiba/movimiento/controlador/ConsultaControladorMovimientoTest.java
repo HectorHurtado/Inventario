@@ -1,6 +1,10 @@
 package com.ceiba.movimiento.controlador;
 
 import com.ceiba.ApplicationMock;
+import com.ceiba.movimiento.comando.ComandoMovimiento;
+import com.ceiba.movimiento.testdatabuilder.ComandoMovimientoTestDataBuilder;
+import com.ceiba.producto.comando.ComandoProducto;
+import com.ceiba.producto.testdatabuilder.ComandoProductoTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +22,7 @@ import java.util.Date;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -48,29 +53,13 @@ public class ConsultaControladorMovimientoTest {
     @Test
     public void obtenerGananciasTest() throws Exception {
         // arrange
-        Date fecha = obtieneFechaParseada("17/09/2021");
+        ComandoMovimiento movimientoGanancia = new ComandoMovimientoTestDataBuilder().conFechaVenta(new Date()).build();
         // act - assert
-        mocMvc.perform(get("/movimientos/obtenerGanancia")
+        mocMvc.perform(get("/movimientos/ganancia")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(fecha)))
-                .andExpect(status().isOk());
-                //.andExpect(jsonPath("$", hasSize(1)))
-                //.andExpect(jsonPath("$[0]", is(2000.0)));
+                        .content(objectMapper.writeValueAsString(movimientoGanancia)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.valor", is(4000.0)));
     }
-
-
-    private Date obtieneFechaParseada(String fecha){
-
-        Date date = null;
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            date = sdf.parse(fecha);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        return date;
-    }
-
 
 }

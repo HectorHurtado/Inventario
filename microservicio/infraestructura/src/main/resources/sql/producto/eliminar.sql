@@ -1,3 +1,3 @@
-delete 
+delete
 from producto
-where id = :id
+where id = :id;

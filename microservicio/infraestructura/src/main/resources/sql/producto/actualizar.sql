@@ -1,5 +1,5 @@
 update producto
 set nombre = :nombre,
-	precio_compra = :precioCompra,
+	fecha_abastecimiento = :fechaAbastecimiento,
 	stock = :stock
 where id = :id
