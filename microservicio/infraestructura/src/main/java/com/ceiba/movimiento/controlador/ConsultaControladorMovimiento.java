@@ -32,9 +32,9 @@ public class ConsultaControladorMovimiento {
     }
 
 
-    @GetMapping(value = "/ganancia")
+    @PostMapping(value = "/ganancia")
     @ApiOperation("obtener ganancias")
-    public ComandoRespuesta<Float> getProfit(@RequestBody ComandoMovimiento comandoMovimiento) {
+    public ComandoRespuesta<Float> consultarGanancia(@RequestBody ComandoMovimiento comandoMovimiento) {
         return this.manejadorObtenerGananciaMovimientos.ejecutar(comandoMovimiento);
     }
 

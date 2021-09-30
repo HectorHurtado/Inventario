@@ -55,7 +55,7 @@ public class ConsultaControladorMovimientoTest {
         // arrange
         ComandoMovimiento movimientoGanancia = new ComandoMovimientoTestDataBuilder().conFechaVenta(new Date()).build();
         // act - assert
-        mocMvc.perform(get("/movimientos/ganancia")
+        mocMvc.perform(post("/movimientos/ganancia")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(movimientoGanancia)))
                 .andExpect(status().isOk())
