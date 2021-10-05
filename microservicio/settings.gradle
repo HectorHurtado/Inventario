@@ -1,4 +1,4 @@
-rootProject.name = 'Inventario'
+rootProject.name = 'inventario'
 
 include ':infraestructura'
 include ':aplicacion'
